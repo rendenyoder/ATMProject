@@ -11,18 +11,21 @@ public class Scene1{
 
     //Set scene 1
     protected static Scene setScene1(Stage window){
+        //Getting user from atm card
+        User user = new User(100, "�ܛ�R�M�\u00006��1>�U");
         //Set up scene1
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
-        //Welcome Label
+        //Labels
         Label welcome = new Label("Welcome to Rock Solid Credit Union");
-        welcome.setId("big-label");
-        //Instruction label
         Label instruction = new Label("Please insert your ATM card!");
+        //Set Id
         instruction.setId("med-label");
+        welcome.setId("big-label");
         //Button that directs to scene 2
         Button button = new Button("Insert ATM Card");
-        button.setOnAction(e -> window.setScene(Scene2.setScene2(window)));
+        button.getStyleClass().add("button-blue");
+        button.setOnAction(e -> window.setScene(Scene2.setScene2(window, user)));
         //Set Layout variables
         layout.getChildren().addAll(welcome, instruction, button);
         //Create sceen with layout set and window width & height

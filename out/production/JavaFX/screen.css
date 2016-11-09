@@ -5,15 +5,24 @@
     -fx-text-fill: #e8e8e8;
 }
 .button{
-    -fx-background-color: #AB4642;
+    -fx-background-color: #383838;
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 4;
+    -fx-border-width: 1px;
+    -fx-border-color: white;
+    -fx-border-radius: 4px;
 }
 .button:hover{
-    -fx-background-color: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #383838;
 }
 .button-blue{
     -fx-background-color: #7cafc2;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 4;
+}
+.button-red{
+    -fx-background-color: #AB4642;
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 4;
 }
@@ -27,4 +36,11 @@
 #top-label{
     -fx-font-size: 26px;
     -fx-label-padding: 20px;
+}
+.keypad{
+    -fx-background-radius: 30px;
+}
+#pin-label{
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
 }
