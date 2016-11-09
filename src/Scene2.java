@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
@@ -137,27 +138,34 @@ public class Scene2{
 
     //Check pin to see if it matches
     private static void checkPin(Stage window, User user){
-        //Check amount of attempts
+        //If a valid length pin has been entered
+        if(pinNumber.length() >= 4) {
+            //Get hashed pin
+            String hashedPin = hashPin();
+            //If correct pin go to account or lock out screen or invalid pin stage
+            if (hashedPin.equals(user.getPin())) {
+                user.setAttempts(0);
+                window.setScene(Scene5.setScene5(window, user));
+            } else if(user.getAttempts() >= 3) {
+                window.setScene(Scene4.setScene4(window, user));
+            } else {
+                clearPin();
+                window.setScene(Scene3.setScene3(window));
+            }
+        }
+        //Increment attempts
+        user.setAttempts(user.getAttempts() + 1);
+    }
+
+    //Create hash of entered pin
+    private static String hashPin(){
         try {
-            //Convert entered pin to MD5 hash to compare to stored hash
             byte[] bytesOfMessage = pinNumber.getBytes("UTF-8");
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] thedigest = md.digest(bytesOfMessage);
-            String pinHash = new String(thedigest, StandardCharsets.UTF_8);
-            //If attempts for specific user is over 3, retain card
-            if(pinNumber.length() >= 4) {
-                if (pinHash.equals(user.getPin())) {
-                    user.setAttempts(0);
-                    window.setScene(Scene5.setScene5(window, user));
-                } else if(user.getAttempts() >= 3) {
-                    window.setScene(Scene4.setScene4(window, user));
-                } else {
-                    clearPin();
-                    window.setScene(Scene3.setScene3(window));
-                }
-            }
-        } catch(Exception ex){}
-        //Increment attempts
-        user.setAttempts(user.getAttempts() + 1);
+            return new String(thedigest, StandardCharsets.UTF_8);
+        }catch (Exception e){
+            return null;
+        }
     }
 }
