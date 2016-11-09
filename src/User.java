@@ -1,6 +1,3 @@
-/**
- * Created by rendenyoder on 11/8/16.
- */
 public class User {
     private int attempts;
     private double balance;
@@ -15,23 +12,18 @@ public class User {
     public int getAttempts() {
         return attempts;
     }
-
     public void setAttempts(int attempts) {
         this.attempts = attempts;
     }
-
     public double getBalance() {
         return balance;
     }
-
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
     public String getPin() {
         return pin;
     }
-
     public void setPin(String pin) {
         this.pin = pin;
     }

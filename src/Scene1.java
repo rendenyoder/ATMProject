@@ -24,8 +24,8 @@ public class Scene1{
         welcome.setId("big-label");
         //Button that directs to scene 2
         Button button = new Button("Insert ATM Card");
-        button.getStyleClass().add("button-blue");
         button.setOnAction(e -> window.setScene(Scene2.setScene2(window, user)));
+        button.getStyleClass().add("nav-button");
         //Set Layout variables
         layout.getChildren().addAll(welcome, instruction, button);
         //Create sceen with layout set and window width & height
