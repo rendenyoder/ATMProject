@@ -23,7 +23,7 @@ public class Scene3 {
         //Button that directs to scene 3
         Button button = new Button("Back to Keypad");
         button.setOnAction(e -> window.setScene(Scene2.getScene2()));
-        button.getStyleClass().add("nav-button");
+        button.getStyleClass().add("button-red");
         //Set Layout variables
         layout.getChildren().addAll(warning, instruction, button);
         //Create sceen with layout set and window width & height

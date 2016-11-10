@@ -37,9 +37,9 @@ public class Scene5 {
         cancel.getStyleClass().add("button-red");
         //Set action
         balance.setOnAction(e -> window.setScene(Scene6.setScene6(window, user)));
-        //deposit.setOnAction(e -> window.setScene(Scene7.setScene7(window, user)));
-        //withdrawal.setOnAction(e -> window.setScene(Scene13.setScene13(window, user)));
-        cancel.setOnAction(e -> window.setScene(Scene1.getScene1()));
+        deposit.setOnAction(e -> window.setScene(Scene13.setScene13(window, user)));
+        withdrawal.setOnAction(e -> window.setScene(Scene7.setScene7(window, user)));
+        cancel.setOnAction(e -> window.setScene(Scene15.setScene15(window)));
         //Set Layout variables
         layout.getChildren().addAll(welcome, instruction, balance, deposit, withdrawal, cancel);
         //Create sceen with layout set and window width & height

@@ -8,31 +8,29 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+public class Scene7 {
+    protected static Scene scene7;
+    private static String withdrawal = "0";
+    private static Label withdrawalLabel;
 
-public class Scene2{
-    //Scene 2 variables
-    protected static Scene scene2;
-    private static String pinNumber = "";
-    private static Label pinLabel;
-
-    //Set Scene 2
-    protected static Scene setScene2(Stage window, User user){
+    //Set Scene 7
+    protected static Scene setScene7(Stage window, User user) {
         //Create layout for upper part of screen
         VBox upperlayout = new VBox(20);
         upperlayout.setAlignment(Pos.CENTER);
         //Labels
-        Label prompt = new Label("Please enter your ATM pin");
-        pinLabel = new Label("");
+        Label prompt = new Label("Enter withdrawal amount:");
+        Label message = new Label("Must a be multiple of $10");
+        withdrawalLabel = new Label("");
         //String to store pin number
-        //Clears pin label and pinNumber (used when returning from a different stage)
-        clearPin();
+        //Clears pin label and withdrawal (used when returning from a different stage)
+        clearAmount();
         //Set Id
-        pinLabel.setId("big-label");
+        withdrawalLabel.setId("big-label");
+        message.setId("med-label");
         prompt.setId("top-label");
         //Set Layout variables
-        upperlayout.getChildren().addAll(prompt, pinLabel);
+        upperlayout.getChildren().addAll(prompt, message, withdrawalLabel);
 
         //Create grid for lower part of screen
         GridPane lowerGrid = new GridPane();
@@ -63,7 +61,7 @@ public class Scene2{
         enter.getStyleClass().add("button-blue");
         clear.getStyleClass().add("button-red");
         cancel.getStyleClass().add("button-red");
-        pinLabel.setId("pin-label");
+        withdrawalLabel.setId("pin-label");
         printReciept.setMinWidth(100);
         enter.setMinWidth(100);
         clear.setMinWidth(100);
@@ -96,9 +94,9 @@ public class Scene2{
         button8.setOnAction(e -> appendToPin(8));
         button9.setOnAction(e -> appendToPin(9));
         button0.setOnAction(e -> appendToPin(0));
-        clear.setOnAction(e -> clearPin());
-        enter.setOnAction(e -> checkPin(window, user));
-        cancel.setOnAction(e -> window.setScene(Scene1.getScene1()));
+        clear.setOnAction(e -> clearAmount());
+        enter.setOnAction(e -> checkAmount(window, user));
+        cancel.setOnAction(e -> window.setScene(Scene5.getScene5()));
 
         //Add each to lower grid
         lowerGrid.getChildren().addAll(printReciept, enter, clear, cancel,
@@ -111,61 +109,50 @@ public class Scene2{
         layout.setCenter(lowerGrid);
 
         //Draw scene
-        scene2 = new Scene(layout, Main.WIDTH, Main.HEIGHT);
+        scene7 = new Scene(layout, Main.WIDTH, Main.HEIGHT);
         //Get style sheet
-        scene2.getStylesheets().add("screen.css");
+        scene7.getStylesheets().add("screen.css");
         //Return new scene
-        return scene2;
+        return scene7;
     }
 
     //Get Scene 2 if it has already been set
-    public static Scene getScene2(){return scene2;}
-
-    //Set entered pin
-    private static void appendToPin(int x){
-        //Add to pinNumber while it's less than 4
-        if(pinNumber.length() < 4) {
-            pinNumber += x;
-            pinLabel.setText(pinLabel.getText() + " • ");
-        }
+    public static Scene getScene7() {
+        return scene7;
     }
 
-    //Clear pinLabel and pinNumber
-    private static void clearPin(){
-        pinLabel.setText("");
-        pinNumber = "";
+    //Set entered pin
+    private static void appendToPin(int x) {
+        if(withdrawal.equals("0"))
+            withdrawal = Integer.toString(x);
+        else if(withdrawal.length() < 4)
+            withdrawal += x;
+        withdrawalLabel.setText("$" + withdrawal);
+    }
+
+    //Clear withdrawalLabel and withdrawal
+    private static void clearAmount() {
+        withdrawal = "0";
+        withdrawalLabel.setText("$" + withdrawal);
     }
 
     //Check pin to see if it matches
-    private static void checkPin(Stage window, User user){
-        //If a valid length pin has been entered
-        if(pinNumber.length() >= 4) {
-            //Get hashed pin
-            String hashedPin = hashPin();
-            //If correct pin go to account or lock out screen or invalid pin stage
-            if (hashedPin.equals(user.getPin())) {
-                user.setAttempts(0);
-                window.setScene(Scene5.setScene5(window, user));
-            } else if(user.getAttempts() >= 3) {
-                window.setScene(Scene4.setScene4(window, user));
-            } else {
-                clearPin();
-                window.setScene(Scene3.setScene3(window));
-            }
-        }
-        //Increment attempts
-        user.setAttempts(user.getAttempts() + 1);
-    }
-
-    //Create hash of entered pin
-    private static String hashPin(){
+    private static void checkAmount(Stage window, User user) {
         try {
-            byte[] bytesOfMessage = pinNumber.getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] thedigest = md.digest(bytesOfMessage);
-            return new String(thedigest, StandardCharsets.UTF_8);
-        }catch (Exception e){
-            return null;
+            //If a valid amount has been entered
+            if (Integer.parseInt(withdrawal) % 10 == 0 && user.getBalance() >= Integer.parseInt(withdrawal)) {
+                user.setBalance(user.getBalance() - Integer.parseInt(withdrawal));
+                window.setScene(Scene11.setScene11(window));
+            } else if (Integer.parseInt(withdrawal) % 10 != 0) {
+                window.setScene(Scene9.setScene9(window));
+            } else if (user.getBalance() < Integer.parseInt(withdrawal)) {
+                window.setScene(Scene8.setScene8(window));
+            } else {
+                window.setScene(Scene10.setScene10(window));
+            }
+        } catch (Exception e){
+            window.setScene(Scene10.setScene10(window));
         }
     }
 }
+
