@@ -16,13 +16,13 @@ public class Scene15 {
         layout.setAlignment(Pos.CENTER);
         //Labels
         Label prompt = new Label("Have a nice day!");
-        Label message = new Label("Thank you for using Rock Solid Credit Union");
+        Label message = new Label("Please remember to take your ATM card");
         //Set Id
         prompt.setId("big-label");
         message.setId("med-label");
         //Button that directs to scene 6
         Button button = new Button("Back to Home");
-        button.setOnAction(e -> window.setScene(Scene1.getScene1()));
+        button.setOnAction(e -> window.setScene(Scene1.setScene1(window)));
         button.getStyleClass().add("nav-button");
         //Set Layout variables
         layout.getChildren().addAll(prompt, message, button);

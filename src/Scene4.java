@@ -24,7 +24,7 @@ public class Scene4 {
         description.setId("med-label");
         //Button that directs to scene 4
         Button button = new Button("Exit");
-        button.setOnAction(e -> window.setScene(Scene1.getScene1()));
+        button.setOnAction(e -> window.setScene(Scene1.setScene1(window)));
         //Set width
         button.setMinWidth(100);
         button.getStyleClass().add("button-red");

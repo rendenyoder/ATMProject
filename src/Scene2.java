@@ -8,13 +8,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-
 public class Scene2{
     //Scene 2 variables
     protected static Scene scene2;
-    private static String pinNumber = "";
+    private static String pinNumber = ""; //CORRECT PIN = 1234
     private static Label pinLabel;
 
     //Set Scene 2
@@ -141,7 +138,7 @@ public class Scene2{
         //If a valid length pin has been entered
         if(pinNumber.length() >= 4) {
             //Get hashed pin
-            String hashedPin = hashPin();
+            String hashedPin = User.hashPin(pinNumber);
             //If correct pin go to account or lock out screen or invalid pin stage
             if (hashedPin.equals(user.getPin())) {
                 user.setAttempts(0);
@@ -155,17 +152,5 @@ public class Scene2{
         }
         //Increment attempts
         user.setAttempts(user.getAttempts() + 1);
-    }
-
-    //Create hash of entered pin
-    private static String hashPin(){
-        try {
-            byte[] bytesOfMessage = pinNumber.getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] thedigest = md.digest(bytesOfMessage);
-            return new String(thedigest, StandardCharsets.UTF_8);
-        }catch (Exception e){
-            return null;
-        }
     }
 }

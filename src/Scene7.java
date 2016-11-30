@@ -127,28 +127,30 @@ public class Scene7 {
             withdrawal = Integer.toString(x);
         else if(withdrawal.length() < 4)
             withdrawal += x;
-        withdrawalLabel.setText("$" + withdrawal);
+        withdrawalLabel.setText("$" + withdrawal + ".00");
     }
 
     //Clear withdrawalLabel and withdrawal
     private static void clearAmount() {
         withdrawal = "0";
-        withdrawalLabel.setText("$" + withdrawal);
+        withdrawalLabel.setText("$" + withdrawal + ".00");
     }
 
-    //Check pin to see if it matches
+    //Check amount to see if it is valid
     private static void checkAmount(Stage window, User user) {
         try {
-            //If a valid amount has been entered
-            if (Integer.parseInt(withdrawal) % 10 == 0 && user.getBalance() >= Integer.parseInt(withdrawal)) {
-                user.setBalance(user.getBalance() - Integer.parseInt(withdrawal));
-                window.setScene(Scene11.setScene11(window));
-            } else if (Integer.parseInt(withdrawal) % 10 != 0) {
-                window.setScene(Scene9.setScene9(window));
-            } else if (user.getBalance() < Integer.parseInt(withdrawal)) {
-                window.setScene(Scene8.setScene8(window));
-            } else {
-                window.setScene(Scene10.setScene10(window));
+            if(Integer.parseInt(withdrawal) > 0) {
+                //If a valid amount has been entered
+                if (Integer.parseInt(withdrawal) % 10 == 0 && user.getBalance() >= Integer.parseInt(withdrawal)) {
+                    user.setBalance(user.getBalance() - Integer.parseInt(withdrawal));
+                    window.setScene(Scene11.setScene11(window));
+                } else if (Integer.parseInt(withdrawal) % 10 != 0) {
+                    window.setScene(Scene9.setScene9(window));
+                } else if (user.getBalance() < Integer.parseInt(withdrawal)) {
+                    window.setScene(Scene8.setScene8(window));
+                } else {
+                    window.setScene(Scene10.setScene10(window));
+                }
             }
         } catch (Exception e){
             window.setScene(Scene10.setScene10(window));

@@ -45,7 +45,7 @@ public class Scene13 {
     public static void addToBalance(Stage window, User user){
         try {
             Random r = new Random();
-            user.setBalance(user.getBalance() + ((r.nextInt(9) + 1) * 10));
+            user.setBalance(user.getBalance() + ((r.nextInt(49) + 1) * 10));
             window.setScene(Scene14.setScene14(window));
         } catch (Exception e){
             window.setScene(Scene12.setScene12(window));

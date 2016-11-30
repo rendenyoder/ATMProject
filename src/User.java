@@ -1,3 +1,6 @@
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 public class User {
     private int attempts;
     private double balance;
@@ -26,5 +29,16 @@ public class User {
     }
     public void setPin(String pin) {
         this.pin = pin;
+    }
+    //Create hash of entered pin
+    protected static String hashPin(String pinNumber){
+        try {
+            byte[] bytesOfMessage = pinNumber.getBytes("UTF-8");
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] thedigest = md.digest(bytesOfMessage);
+            return new String(thedigest, StandardCharsets.UTF_8);
+        }catch (Exception e){
+            return null;
+        }
     }
 }

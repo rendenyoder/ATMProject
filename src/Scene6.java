@@ -16,16 +16,16 @@ public class Scene6 {
         layout.setAlignment(Pos.CENTER);
         //Labels
         Label prompt = new Label("Your current balance is:");
-        Label balance = new Label("$" + Double.toString(user.getBalance()));
+        Label balanceLabel = new Label("$" + Double.toString(user.getBalance()) + "0");
         //Set Id
         prompt.setId("med-label");
-        balance.setId("big-label");
+        balanceLabel.setId("big-label");
         //Button that directs to scene 6
         Button button = new Button("Back to Keypad");
         button.setOnAction(e -> window.setScene(Scene5.getScene5()));
         button.getStyleClass().add("nav-button");
         //Set Layout variables
-        layout.getChildren().addAll(prompt, balance, button);
+        layout.getChildren().addAll(prompt, balanceLabel, button);
         //Create sceen with layout set and window width & height
         scene6 = new Scene(layout, Main.WIDTH, Main.HEIGHT);
         //Get style sheet

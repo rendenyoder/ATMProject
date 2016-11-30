@@ -23,7 +23,7 @@ public class Scene14 {
         //Button that directs to scene 4
         Button yesButton = new Button("Yes");
         Button noButton = new Button("No");
-        yesButton.setOnAction(e -> window.setScene(Scene1.getScene1()));
+        yesButton.setOnAction(e -> window.setScene(Scene15.setScene15(window)));
         noButton.setOnAction(e -> window.setScene(Scene5.getScene5()));
         //Set width
         yesButton.setMinWidth(100);
@@ -31,7 +31,7 @@ public class Scene14 {
         yesButton.getStyleClass().add("button-red");
         noButton.getStyleClass().add("nav-button");
         //Set Layout variables
-        layout.getChildren().addAll(warning, description, yesButton, noButton);
+        layout.getChildren().addAll(warning, description, noButton, yesButton);
         //Create sceen with layout set and window width & height
         scene14 = new Scene(layout, Main.WIDTH, Main.HEIGHT);
         //Get style sheet
