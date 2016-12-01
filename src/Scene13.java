@@ -44,12 +44,17 @@ public class Scene13 {
     //Increase balance
     public static void addToBalance(Stage window, User user){
         try {
-            Random r = new Random();
-            user.setBalance(user.getBalance() + ((r.nextInt(49) + 1) * 10));
+            user.setBalance(user.getBalance() + genRandDeposit());
             window.setScene(Scene14.setScene14(window));
         } catch (Exception e){
             window.setScene(Scene12.setScene12(window));
         }
+    }
+
+    //Generate a random deposit amount between $10 - $500
+    public static double genRandDeposit(){
+        Random r = new Random();
+        return ((r.nextInt(49) + 1) * 10);
     }
 
     //Get Scene 13 if it has already been set

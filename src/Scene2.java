@@ -83,16 +83,16 @@ public class Scene2{
         lowerGrid.setConstraints(button0, 2, 3);
 
         //Set keypad actions
-        button1.setOnAction(e -> appendToPin(1));
-        button2.setOnAction(e -> appendToPin(2));
-        button3.setOnAction(e -> appendToPin(3));
-        button4.setOnAction(e -> appendToPin(4));
-        button5.setOnAction(e -> appendToPin(5));
-        button6.setOnAction(e -> appendToPin(6));
-        button7.setOnAction(e -> appendToPin(7));
-        button8.setOnAction(e -> appendToPin(8));
-        button9.setOnAction(e -> appendToPin(9));
-        button0.setOnAction(e -> appendToPin(0));
+        button1.setOnAction(e -> pinLabel.setText(appendToPin(1)));
+        button2.setOnAction(e -> pinLabel.setText(appendToPin(2)));
+        button3.setOnAction(e -> pinLabel.setText(appendToPin(3)));
+        button4.setOnAction(e -> pinLabel.setText(appendToPin(4)));
+        button5.setOnAction(e -> pinLabel.setText(appendToPin(5)));
+        button6.setOnAction(e -> pinLabel.setText(appendToPin(6)));
+        button7.setOnAction(e -> pinLabel.setText(appendToPin(7)));
+        button8.setOnAction(e -> pinLabel.setText(appendToPin(8)));
+        button9.setOnAction(e -> pinLabel.setText(appendToPin(9)));
+        button0.setOnAction(e -> pinLabel.setText(appendToPin(0)));
         clear.setOnAction(e -> clearPin());
         enter.setOnAction(e -> checkPin(window, user));
         cancel.setOnAction(e -> window.setScene(Scene1.getScene1()));
@@ -119,11 +119,13 @@ public class Scene2{
     public static Scene getScene2(){return scene2;}
 
     //Set entered pin
-    private static void appendToPin(int x){
+    private static String appendToPin(int x){
         //Add to pinNumber while it's less than 4
         if(pinNumber.length() < 4) {
             pinNumber += x;
-            pinLabel.setText(pinLabel.getText() + " • ");
+            return (pinLabel.getText() + " • ");
+        } else{
+            return (pinLabel.getText());
         }
     }
 

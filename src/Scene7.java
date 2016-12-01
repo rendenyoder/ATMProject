@@ -84,16 +84,16 @@ public class Scene7 {
         lowerGrid.setConstraints(button0, 2, 3);
 
         //Set keypad actions
-        button1.setOnAction(e -> appendToPin(1));
-        button2.setOnAction(e -> appendToPin(2));
-        button3.setOnAction(e -> appendToPin(3));
-        button4.setOnAction(e -> appendToPin(4));
-        button5.setOnAction(e -> appendToPin(5));
-        button6.setOnAction(e -> appendToPin(6));
-        button7.setOnAction(e -> appendToPin(7));
-        button8.setOnAction(e -> appendToPin(8));
-        button9.setOnAction(e -> appendToPin(9));
-        button0.setOnAction(e -> appendToPin(0));
+        button1.setOnAction(e -> withdrawalLabel.setText(appendToPin(1)));
+        button2.setOnAction(e -> withdrawalLabel.setText(appendToPin(2)));
+        button3.setOnAction(e -> withdrawalLabel.setText(appendToPin(3)));
+        button4.setOnAction(e -> withdrawalLabel.setText(appendToPin(4)));
+        button5.setOnAction(e -> withdrawalLabel.setText(appendToPin(5)));
+        button6.setOnAction(e -> withdrawalLabel.setText(appendToPin(6)));
+        button7.setOnAction(e -> withdrawalLabel.setText(appendToPin(7)));
+        button8.setOnAction(e -> withdrawalLabel.setText(appendToPin(8)));
+        button9.setOnAction(e -> withdrawalLabel.setText(appendToPin(9)));
+        button0.setOnAction(e -> withdrawalLabel.setText(appendToPin(0)));
         clear.setOnAction(e -> clearAmount());
         enter.setOnAction(e -> checkAmount(window, user));
         cancel.setOnAction(e -> window.setScene(Scene5.getScene5()));
@@ -122,12 +122,12 @@ public class Scene7 {
     }
 
     //Set entered pin
-    private static void appendToPin(int x) {
+    private static String appendToPin(int x) {
         if(withdrawal.equals("0"))
             withdrawal = Integer.toString(x);
         else if(withdrawal.length() < 4)
             withdrawal += x;
-        withdrawalLabel.setText("$" + withdrawal + ".00");
+        return ("$" + withdrawal + ".00");
     }
 
     //Clear withdrawalLabel and withdrawal

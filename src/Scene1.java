@@ -4,8 +4,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Scene1{
@@ -29,7 +27,7 @@ public class Scene1{
         button.getStyleClass().add("nav-button");
         //Set Layout variables
         layout.getChildren().addAll(welcome, instruction, button);
-        //Create sceen with layout set and window width & height
+        //Create screen with layout set and window width & height
         scene1 = new Scene(layout, Main.WIDTH, Main.HEIGHT);
         //Get style sheet
         scene1.getStylesheets().add("screen.css");
